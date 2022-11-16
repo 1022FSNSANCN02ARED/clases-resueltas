@@ -17,6 +17,6 @@ const concesionaria = {
     }
     // si terminé de recorrer el array,
     //    devolver null
-    return null;
+    return undefined;
   },
 };

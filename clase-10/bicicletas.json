@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "marca": "Fierce",
+    "modelo": "FM18SI29AM211",
+    "rodado": 16,
+    "anioDeFabricacion": 2019,
+    "color": "Celeste",
+    "peso": 13,
+    "tipo": "Montañera",
+    "precio": 1200,
+    "vendida": true
+  },
+  {
+    "id": 15,
+    "marca": "Fierce",
+    "modelo": "FM18SI29AM211",
+    "rodado": 16,
+    "anioDeFabricacion": 2019,
+    "color": "Celeste",
+    "peso": 13,
+    "tipo": "Montañera",
+    "precio": 1200,
+    "vendida": false
+  },
+  {
+    "id": 16,
+    "marca": "Fierce",
+    "modelo": "FM18SI29AM211",
+    "rodado": 16,
+    "anioDeFabricacion": 2019,
+    "color": "Celeste",
+    "peso": 13,
+    "tipo": "Montañera",
+    "precio": 1200,
+    "vendida": false
+  }
+]

@@ -4,50 +4,83 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/normalize.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+
     <title>Mercado Liebre</title>
   </head>
   <body>
-    <header>
-      <header>
-        <h1>
-          <img src="/images/logo-mercado-liebre.svg" alt="Mercado Liebre" />
-        </h1>
-        <p>Lugar para poner barra de busqueda</p>
-        <p>Comprá en cuotas y sin tarjeta de credito</p>
-        <nav>
-          <ul>
-            <li><a href="#">Ofertas</a></li>
-            <li><a href="#">Tiendas Oficiales</a></li>
-            <li><a href="#">Vender</a></li>
-            <li><a href="#">Ayuda</a></li>
-          </ul>
-          <ul>
-            <li><a href="#">Crea tu cuenta</a></li>
-            <li><a href="#">Ingresá</a></li>
-            <li><a href="#">Mis Compras</a></li>
-          </ul>
-        </nav>
-      </header>
+    <header class="bg-yellow p-1">
+      <h1 class="w-50">
+        <img src="/images/logo-mercado-liebre.svg" alt="Mercado Liebre" />
+      </h1>
+      <div class="p-1">
+        <input
+          type="text"
+          placeholder="Buscá productos por nombre, marcas o palabras clave"
+        />
+        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+      <p class="text-center">
+        <i class="fa-solid fa-hand-holding-dollar"></i>Comprá en cuotas y sin
+        tarjeta de crédito
+      </p>
+      <nav>
+        <ul class="py-1">
+          <li><a class="nav-link" href="#">Ofertas</a></li>
+          <li><a class="nav-link" href="#">Tiendas Oficiales</a></li>
+          <li><a class="nav-link" href="#">Vender</a></li>
+          <li><a class="nav-link" href="#">Ayuda</a></li>
+        </ul>
+        <ul class="py-1">
+          <li>
+            <a class="nav-link" href="#"
+              >Crea tu cuenta <i class="fa-solid fa-address-card"></i
+            ></a>
+          </li>
+          <li>
+            <a class="nav-link" href="#"
+              >Ingresá <i class="fa-solid fa-right-to-bracket"></i
+            ></a>
+          </li>
+          <li>
+            <a class="nav-link" href="#"
+              >Mis Compras <i class="fa-solid fa-basket-shopping"></i
+            ></a>
+          </li>
+        </ul>
+      </nav>
+      <div class="text-center">
+        <i class="fa-solid fa-bars p-1 bg-blue radius-1 color-white bold"></i>
+      </div>
     </header>
     <img
       src="/images/img-home-banner.jpg"
       alt="Promoción fiestas"
       width="100%"
     />
-    <main>
-      <section>
-        <h2>Basado en tu última visita</h2>
+    <main class="p-1">
+      <section class="p-1">
+        <h2 class="title">Basado en tu última visita</h2>
         <article>
-          <a href="#">
-            <img
-              width="100%"
-              src="/images/img-cafetera-moulinex.jpg"
-              alt="Cafetera Moulinex"
-            />
-            <p>$6.770</p>
-            <p>40% OFF</p>
-            <h3>Cafetera Moulinex</h3>
-          </a>
+          <img
+            width="100%"
+            src="/images/img-cafetera-moulinex.jpg"
+            alt="Cafetera Moulinex"
+          />
+          <p class="text-xl">$6.770</p>
+          <p class="color-green text-lg">40% OFF</p>
+          <h3 class="text-lg">Cafetera Moulinex</h3>
         </article>
         <article>
           <img
@@ -55,9 +88,9 @@
             src="/images/img-macbook-pro-2019.jpg"
             alt="Macbook Pro 2019"
           />
-          <p>$230.000</p>
-          <p>20% off</p>
-          <h3>MacBook Pro 2019</h3>
+          <p class="text-xl">$230.000</p>
+          <p class="color-green text-lg">20% off</p>
+          <h3 class="text-lg">MacBook Pro 2019</h3>
         </article>
         <article>
           <img
@@ -65,9 +98,9 @@
             src="/images/img-samsung-galaxy-s10.jpg"
             alt="Samsung Galaxy S10"
           />
-          <p>$70.500</p>
-          <p>10% off</p>
-          <h3>Samsung Galaxy S10</h3>
+          <p class="text-xl">$70.500</p>
+          <p class="color-green text-lg">10% off</p>
+          <h3 class="text-lg">Samsung Galaxy S10</h3>
         </article>
         <article>
           <img
@@ -75,12 +108,12 @@
             src="/images/img-tv-samsung-smart.jpg"
             alt="Samsung Galaxy S10"
           />
-          <p>$23.200</p>
-          <p>5% off</p>
-          <h3>SmartTv Samsung 43"</h3>
+          <p class="text-xl">$23.200</p>
+          <p class="color-green text-lg">5% off</p>
+          <h3 class="text-lg">SmartTv Samsung 43"</h3>
         </article>
       </section>
-      <section>
+      <section class="p-1">
         <h2>Ofertas</h2>
         <article>
           <img
@@ -88,9 +121,9 @@
             src="/images/img-cafetera-moulinex.jpg"
             alt="Cafetera Moulinex"
           />
-          <p>$6.770</p>
-          <p>40% OFF</p>
-          <h3>Cafetera Moulinex</h3>
+          <p class="text-xl">$6.770</p>
+          <p class="color-green text-lg">40% OFF</p>
+          <h3 class="text-lg">Cafetera Moulinex</h3>
         </article>
         <article>
           <img
@@ -98,9 +131,9 @@
             src="/images/img-macbook-pro-2019.jpg"
             alt="Macbook Pro 2019"
           />
-          <p>$230.000</p>
-          <p>20% off</p>
-          <h3>MacBook Pro 2019</h3>
+          <p class="text-xl">$230.000</p>
+          <p class="color-green text-lg">20% off</p>
+          <h3 class="text-lg">MacBook Pro 2019</h3>
         </article>
         <article>
           <img
@@ -108,9 +141,9 @@
             src="/images/img-samsung-galaxy-s10.jpg"
             alt="Samsung Galaxy S10"
           />
-          <p>$70.500</p>
-          <p>10% off</p>
-          <h3>Samsung Galaxy S10</h3>
+          <p class="text-xl">$70.500</p>
+          <p class="color-green text-lg">10% off</p>
+          <h3 class="text-lg">Samsung Galaxy S10</h3>
         </article>
         <article>
           <img
@@ -118,9 +151,9 @@
             src="/images/img-tv-samsung-smart.jpg"
             alt="Samsung Galaxy S10"
           />
-          <p>$23.200</p>
-          <p>5% off</p>
-          <h3>SmartTv Samsung 43"</h3>
+          <p class="text-xl">$23.200</p>
+          <p class="color-green text-lg">5% off</p>
+          <h3 class="text-lg">SmartTv Samsung 43"</h3>
         </article>
       </section>
     </main>

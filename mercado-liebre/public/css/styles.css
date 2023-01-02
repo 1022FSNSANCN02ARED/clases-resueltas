@@ -185,6 +185,10 @@ body {
   .description {
     display: none;
   }
+
+  .product:hover .description {
+    display: block;
+  }
 }
 
 @media (min-width: 1281px) {

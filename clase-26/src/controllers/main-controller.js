@@ -1,47 +1,31 @@
-// <h4>Carpaccio fresco</h4>
-// <p class="ps-text-grey">
-//   Entrada Carpaccio de salmón con cítricos U$S 65.50
-// </p>
-// <br />
-
-// <h4>Risotto de berenjena</h4>
-// <p class="ps-text-grey">
-//   Risotto de berenjena y queso de cabra U$S 47.00
-// </p>
-// <br />
-
-// <h4>Mousse de arroz</h4>
-// <p class="ps-text-grey">
-//   Mousse de arroz con leche y aroma de azahar U$S 27.50
-// </p>
-// <br />
-
-// <h4>Espárragos blancos</h4>
-// <p class="ps-text-grey">
-//   Espárragos blancos con vinagreta de verduras y jamón ibérico U$S
-//   37.50
-// </p>
-
 const platos = [
   {
+    id: 1,
     nombre: "Carpaccio fresco",
     descripcion: "Entrada Carpaccio de salmón con cítricos",
     precio: 65.5,
+    imagen: "/images/carpaccio.jpg",
   },
   {
+    id: 25,
     nombre: "Risotto de berenjena",
     descripcion: "Risotto de berenjena y queso de cabra",
     precio: 47.0,
+    imagen: "/images/risotto.jpg",
   },
   {
+    id: 15,
     nombre: "Mousse de arroz",
     descripcion: "Mousse de arroz con leche y aroma de azahar",
     precio: 27.5,
+    imagen: "/images/mouse.jpg",
   },
   {
+    id: 4,
     nombre: "Espárragos blancos",
     descripcion: "Espárragos blancos con vinagreta de verduras y jamón ibérico",
     precio: 37.5,
+    imagen: "/images/esparragos.png",
   },
 ];
 
@@ -50,11 +34,16 @@ module.exports = {
     res.render("index", {
       platos,
     });
+  },
+  detail: (req, res) => {
+    const id = req.params.id;
 
-    const htmlRenderizado = ejs.render(
-      fs.readFileSync(__dirname, "../views", "utf-8"),
-      { platos }
-    );
-    res.send(htmlRenderizado);
+    const plato = platos.find((plato) => {
+      return plato.id == id;
+    });
+
+    res.render("detalleMenu", {
+      plato: plato,
+    });
   },
 };

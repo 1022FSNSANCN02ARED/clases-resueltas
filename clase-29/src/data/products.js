@@ -12,10 +12,22 @@ module.exports = {
     saveProduct(product) {
         const products = this.findAll();
         products.push(product);
-        const productsFileContent = JSON.stringify(products, null, 4);
-        fs.writeFileSync(productsFilePath, productsFileContent, "utf-8");
+        this.save(products);
     },
     findById(id) {
         return this.findAll().find((p) => p.id == id);
+    },
+
+    updateProduct(id, product) {
+        const products = this.findAll();
+        const oldProduct = products.find((p) => p.id == id);
+        oldProduct.images.push(...product.images);
+        Object.assign(oldProduct, product);
+        this.save(products);
+    },
+
+    save(products) {
+        const productsFileContent = JSON.stringify(products, null, 4);
+        fs.writeFileSync(productsFilePath, productsFileContent, "utf-8");
     },
 };

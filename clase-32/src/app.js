@@ -14,7 +14,11 @@ app.set("view engine", "ejs");
 app.use(
     session({
         secret: "los gatitos son lo mejor",
+        resave: true,
+        saveUninitialized: true,
     })
 );
+
+app.use(cookieParser());
 
 app.use(mainRouter);

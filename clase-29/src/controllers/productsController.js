@@ -50,12 +50,22 @@ const controller = {
     // Update - Method to update
     update: (req, res) => {
         const product = req.body;
-        res.send(product);
+        products.updateProduct(req.params.id, product);
+        res.redirect("/products/" + req.params.id);
     },
 
     // Delete - Delete one product from DB
     destroy: (req, res) => {
         res.send(`deleting ${req.params.id}`);
+    },
+
+    destroyImage: (req, res) => {
+        const allProducts = this.findAll();
+        const product = allProducts.find((p) => p.id == req.params.id);
+        const imageIndex = req.params.imageIndex;
+        product.images.splice(imageIndex, 1);
+        products.save(allProducts);
+        res.redirect("/products/" + req.params.id + "/edit");
     },
 };
 

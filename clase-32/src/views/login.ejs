@@ -5,12 +5,24 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Login</title>
+        <style>
+            p {
+                margin: 0;
+            }
+            .error {
+                color: red;
+            }
+        </style>
     </head>
     <body>
         <form action="/login" method="post">
             <div>
                 <label for="name">Nombre: </label>
-                <input name="name" id="name" type="text" />
+                <input name="name" id="name" type="text" value="<%=
+                locals.oldData ? locals.oldData.name : "" %>" /> <%
+                if(locals.errors && errors.name) {%>
+                <p class="error"><%= errors.name.msg %></p>
+                <% } %>
             </div>
             <div>
                 <label for="color">Color Favorito: </label>
@@ -19,14 +31,23 @@
                     <option value="blue">Azul</option>
                     <option value="green">Verde</option>
                 </select>
+                <% if(locals.errors && errors.color) {%>
+                <p class="error"><%= errors.color.msg %></p>
+                <% } %>
             </div>
             <div>
                 <label for="email">Email: </label>
-                <input name="email" id="email" type="email" />
+                <input name="email" id="email" type="text" />
+                <% if(locals.errors && errors.email) {%>
+                <p class="error"><%= errors.email.msg %></p>
+                <% } %>
             </div>
             <div>
                 <label for="birthDate">Fecha de Nacimiento: </label>
                 <input name="birthDate" id="birthDate" type="date" />
+                <% if(locals.errors && errors.birthDate) {%>
+                <p class="error"><%= errors.birthDate.msg %></p>
+                <% } %>
             </div>
             <button>Submit!</button>
         </form>

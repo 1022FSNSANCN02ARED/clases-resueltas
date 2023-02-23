@@ -1,18 +1,36 @@
 module.exports = {
     showLogin: (req, res) => {
-        res.render("login");
+        //flash messages
+        const errors = req.session.errors;
+        const oldData = req.session.oldData;
+        req.session.errors = null;
+        req.session.oldData = null;
+
+        res.render("login", {
+            errors: errors ? errors : null,
+            oldData: oldData ? oldData : null,
+        });
     },
-    login: (request, res) => {
+
+    //post
+    login: (request, response) => {
         const data = request.body;
-        res.redirect("/");
+
+        // response.cookie("userData", JSON.stringify(data));
+        request.session.userData = data;
+
+        response.redirect("/");
     },
 
     home: (request, response) => {
-        res.render("home", {
-            name: "???",
-            email: "???",
-            favoriteColor: "????",
-            birthDate: "????",
+        // const data = JSON.parse(request.cookies.userData);
+        const data = request.session.userData;
+
+        response.render("index", {
+            name: data.name,
+            email: data.email,
+            favoriteColor: data.color,
+            birthDate: data.birthDate,
         });
     },
 };

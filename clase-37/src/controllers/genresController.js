@@ -8,4 +8,11 @@ module.exports = {
       });
     });
   },
+  detail: (req, res) => {
+    Genres.findByPk(req.params.id).then((genre) => {
+      res.render("genresDetail", {
+        genre,
+      });
+    });
+  },
 };

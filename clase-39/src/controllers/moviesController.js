@@ -1,5 +1,6 @@
 const { Movies } = require("../database/models");
 const Sequelize = require("sequelize");
+const dayjs = require("dayjs");
 
 module.exports = {
   list: (req, res) => {
@@ -35,8 +36,8 @@ module.exports = {
     Movies.findByPk(req.params.id).then((movie) => {
       res.render("moviesDetail", {
         movie: {
-          ...movie.get(),
-          release_date: movie.release_date.toLocaleDateString(),
+          ...movie.dataValues,
+          release_date: dayjs(movie.release_date).format("YYYY-MM-DD"),
         },
       });
     });
@@ -54,8 +55,8 @@ module.exports = {
     Movies.findByPk(req.params.id).then((movie) => {
       res.render("moviesEdit", {
         movie: {
-          ...movie.get(),
-          release_date: movie.release_date.toISOString().substring(0, 10),
+          ...movie.dataValues,
+          release_date: dayjs(movie.release_date).format("YYYY-MM-DD"),
         },
       });
     });

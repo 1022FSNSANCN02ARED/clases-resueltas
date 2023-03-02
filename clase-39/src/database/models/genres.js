@@ -12,5 +12,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
+  Model.associate = (models) => {
+    Model.hasMany(models.Movies, {
+      as: "movies",
+      foreignKey: "genre_id",
+    });
+  };
+
   return Model;
 };

@@ -17,6 +17,14 @@
     <br>
     <p>NAME: <%= genre.name %> </p>
     <p>RANKING: <%= genre.ranking %> </p>
+    <p>MOVIES</p>
+    <ul>
+        <% for( let i = 0; i < genre.movies.length; i++ ) { %>
+        <li>
+            <a href="/movies/detail/<%= genre.movies[i].id %>"><%= genre.movies[i].title %></a>
+        </li>
+        <% } %>
+    </ul>
 
 
 

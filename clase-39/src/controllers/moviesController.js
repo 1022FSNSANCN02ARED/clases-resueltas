@@ -1,4 +1,4 @@
-const { Movies } = require("../database/models");
+const { Movies, Genres, Actors } = require("../database/models");
 const Sequelize = require("sequelize");
 const dayjs = require("dayjs");
 
@@ -34,11 +34,26 @@ module.exports = {
   },
   detail: (req, res) => {
     Movies.findByPk(req.params.id).then((movie) => {
-      res.render("moviesDetail", {
-        movie: {
-          ...movie.dataValues,
-          release_date: dayjs(movie.release_date).format("YYYY-MM-DD"),
-        },
+      Genres.findByPk(movie.genre_id).then((genre) => {
+        Actors.findAll({
+          include: [
+            {
+              association: "movies",
+              where: {
+                id: movie.id,
+              },
+            },
+          ],
+        }).then((actors) => {
+          res.render("moviesDetail", {
+            movie: {
+              ...movie.get(),
+              release_date: movie.release_date.toLocaleDateString(),
+              genre: genre?.name ?? "Sin género",
+              actors: actors.map((actor) => actor.get()),
+            },
+          });
+        });
       });
     });
   },

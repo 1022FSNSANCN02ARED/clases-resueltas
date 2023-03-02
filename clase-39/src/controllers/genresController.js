@@ -1,4 +1,4 @@
-const { Genres } = require("../database/models");
+const { Genres, Movies } = require("../database/models");
 
 module.exports = {
   list: (req, res) => {
@@ -10,8 +10,19 @@ module.exports = {
   },
   detail: (req, res) => {
     Genres.findByPk(req.params.id).then((genre) => {
-      res.render("genresDetail", {
-        genre,
+      Movies.findAll({
+        where: {
+          genre_id: req.params.id,
+        },
+      }).then((movies) => {
+        res.render("genresDetail", {
+          genre: {
+            id: genre.id,
+            name: genre.name,
+            ranking: genre.ranking,
+            movies: movies,
+          },
+        });
       });
     });
   },

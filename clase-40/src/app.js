@@ -2,11 +2,16 @@ const express = require("express");
 const path = require("path");
 const methodOverride = require("method-override");
 
-const indexRouter = require("./routes/index");
-
-const moviesRoutes = require("./routes/moviesRoutes");
-const genresRoutes = require("./routes/genresRoutes");
+const mainRouter = require("./routes/index");
+const dayjs = require("dayjs");
 const app = express();
+
+app.locals = {
+  formatDate(date) {
+    if (!date) return "";
+    return dayjs(date).format("YYYY-MM-DD");
+  },
+};
 
 // view engine setup
 app.set("views", path.resolve(__dirname, "./views"));
@@ -18,8 +23,6 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(methodOverride("_method"));
 
-app.use("/", indexRouter);
-app.use(moviesRoutes);
-app.use(genresRoutes);
+app.use(mainRouter);
 
 app.listen("3001", () => console.log("Servidor corriendo en el puerto 3001"));

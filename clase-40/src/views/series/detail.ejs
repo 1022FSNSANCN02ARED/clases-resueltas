@@ -8,14 +8,16 @@
     <%- include('../partials/header') %>
 
     <h1>Título: <%= serie.title %></h1>
-    <p>Fecha de estreno: <%= serie.release_date %></p>
-    <p>Fecha de fin: <%= serie.end_date %></p>
+    <p>Fecha de estreno: <%= formatDate(serie.release_date) %></p>
+    <p>Fecha de fin: <%= formatDate(serie.end_date) %></p>
 
     <p class="mt-5">Género:</p>
     <% if (serie.genre_id) { %>
-    <p><a href="/genres/detail/<%= serie.genre_id %>"><%= serie.genre %></a></p>
+    <p>
+      <a href="/genres/detail/<%= serie.genre_id %>"><%= serie.genre.name %></a>
+    </p>
     <% } else { %>
-    <p><%= serie.genre %></p>
+    <p>Sin genero definido</p>
     <% } %>
 
     <h2>Episodes:</h2>
@@ -25,9 +27,12 @@
         <% serie.seasons.forEach(season => { %>
         <li>
           <%= season.title %>
-          <a href="/series/<%= serie.id %>/season/<%= season.id %>/episode/add"
-            >Add Episode</a
-          >
+          <button>
+            <a
+              href="/series/<%= serie.id %>/season/<%= season.id %>/episode/add"
+              >Add Episode</a
+            >
+          </button>
           <ul>
             <% season.episodes.forEach(episode => { %>
             <li><%= episode.title %></li>

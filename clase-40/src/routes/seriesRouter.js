@@ -12,6 +12,17 @@ router.delete("/:id", controller.delete);
 
 router.get("/:id", controller.detail);
 
+
+
+
+
+
+
+
+
+
+
+
 //SEASONS AND EPISODES
 
 //ADD SEASON

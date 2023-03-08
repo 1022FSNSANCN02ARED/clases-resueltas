@@ -7,7 +7,7 @@ const dayjs = require("dayjs");
 const app = express();
 
 app.locals = {
-  formatDate(date) {
+  formatDate: (date) => {
     if (!date) return "";
     return dayjs(date).format("YYYY-MM-DD");
   },

@@ -1,40 +1,75 @@
+const { Series, Genres } = require("../database/models");
+
+//async / await
 module.exports = {
-  list: (req, res) => {
+  list: async (req, res) => {
     res.render("series/list", {
-      series: [],
+      series: await Series.findAll(),
     });
   },
 
-  detail: (req, res) => {
+  detail: async (req, res) => {
+    const serie = await Series.findByPk(req.params.id, {
+      include: [
+        {
+          association: "seasons",
+          include: ["episodes"],
+        },
+        "genre",
+      ],
+    });
     res.render("series/detail", {
-      serie: {
-        seasons: [],
-      },
+      serie: serie,
     });
   },
 
-  add: (req, res) => {
+  add: async (req, res) => {
     res.render("series/form", {
-      genres: [],
+      genres: await Genres.findAll(),
     });
   },
-  create: (req, res) => {
-    res.send(req.body);
+  create: async (req, res) => {
+    const serie = await Series.create(req.body);
+    res.redirect("/series/" + serie.id);
   },
 
-  edit: (req, res) => {
-    const serieToEdit = {};
+  edit: async (req, res) => {
     res.render("series/form", {
-      genres: [],
-      serie: serieToEdit,
+      genres: await Genres.findAll(),
+      serie: await Series.findByPk(req.params.id, {
+        include: [
+          {
+            association: "seasons",
+            include: ["episodes"],
+          },
+          "genre",
+        ],
+      }),
     });
   },
-  update: (req, res) => {
-    res.send(req.body);
+  update: async (req, res) => {
+    const serie = await Series.findByPk(req.params.id);
+    await serie.update(req.body);
+    res.redirect("/series/" + serie.id);
   },
 
-  delete: (req, res) => {
-    res.send("DELETED: " + req.params.id);
+  delete: async (req, res) => {
+    const serie = await Series.findByPk(req.params.id, {
+      include: [
+        {
+          association: "seasons",
+          include: ["episodes"],
+        },
+      ],
+    });
+    for (season in serie.seasons) {
+      for (episode in season.episodes) {
+        await episode.setActors([]); //remuevo la relación con actores.
+        await episode.destroy(); //destruyo cada episodio de la temporada
+      }
+      await season.destroy(); //destruyo cada temporada de la serie
+    }
+    await serie.destroy(); //al fin puedo destruir la serie
   },
 
   //SEASON & EPISODE

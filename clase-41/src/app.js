@@ -13,6 +13,7 @@ app.locals = {
   },
 };
 
+app.use(express.json());
 // view engine setup
 app.set("views", path.resolve(__dirname, "./views"));
 app.set("view engine", "ejs");

@@ -34,4 +34,15 @@ module.exports = {
       data: genre,
     });
   },
+
+  create: async (req, res) => {
+    const genre = await Genres.create(req.body);
+    res.json({
+      meta: {
+        status: 201,
+        url: req.originalUrl,
+      },
+      data: genre,
+    });
+  },
 };

@@ -5,6 +5,8 @@ const genresRouter = require("./genresRouter.js");
 const moviesRouter = require("./moviesRouter.js");
 const seriesRouter = require("./seriesRouter.js");
 
+const apiGenresRouter = require("./api/genresRouter.js");
+
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.render("index", { title: "Digital Movies" });
@@ -12,5 +14,7 @@ router.get("/", function (req, res, next) {
 router.use("/genres", genresRouter);
 router.use("/movies", moviesRouter);
 router.use("/series", seriesRouter);
+
+router.use("/api/genres", apiGenresRouter);
 
 module.exports = router;

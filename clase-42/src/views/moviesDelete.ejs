@@ -2,16 +2,11 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borrado de la Película</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+    <%- include("partials/head") %>
+  </head>
 
-<body>
-    <figure>
-        <img src="/img/logo-DH.png" alt="Logo Digital House">
-    </figure>
+  <body>
+    <%- include("partials/header") %>
     <h1>Estas seguro de querer borrar esta película: <%= movie.title %>???</h1>
     <p>
     <form action="/movies/destroy/<%= movie.id %>?_method=DELETE" method="POST">

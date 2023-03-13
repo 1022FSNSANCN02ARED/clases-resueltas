@@ -14,7 +14,6 @@ app.locals = {
 };
 
 app.use(express.json());
-// view engine setup
 app.set("views", path.resolve(__dirname, "./views"));
 app.set("view engine", "ejs");
 
@@ -27,3 +26,8 @@ app.use(methodOverride("_method"));
 app.use(mainRouter);
 
 app.listen("3001", () => console.log("Servidor corriendo en el puerto 3001"));
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});

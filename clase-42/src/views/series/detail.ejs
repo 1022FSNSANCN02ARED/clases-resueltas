@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+
+  <body>
+    <%- include('../partials/header') %>
+
+    <h1>Título: <%= serie.title %></h1>
+    <p>Fecha de estreno: <%= formatDate(serie.release_date) %></p>
+    <p>Fecha de fin: <%= formatDate(serie.end_date) %></p>
+
+    <p class="mt-5">Género:</p>
+    <% if (serie.genre_id) { %>
+    <p>
+      <a href="/genres/detail/<%= serie.genre_id %>"><%= serie.genre.name %></a>
+    </p>
+    <% } else { %>
+    <p>Sin genero definido</p>
+    <% } %>
+
+    <h2>Episodes:</h2>
+    <div style="margin-bottom: 10px">
+      <a href="/series/<%= serie.id %>/season/add">Add Season</a>
+      <ul>
+        <% serie.seasons.forEach(season => { %>
+        <li>
+          <%= season.title %>
+          <button>
+            <a
+              href="/series/<%= serie.id %>/season/<%= season.id %>/episode/add"
+              >Add Episode</a
+            >
+          </button>
+          <ul>
+            <% season.episodes.forEach(episode => { %>
+            <li><%= episode.title %></li>
+            <% }) %>
+          </ul>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <button><a href="/series">Volver</a></button>
+    <button><a href="/series/<%= serie.id %>/edit">Editar</a></button>
+    <form action="/series/<%= serie.id %>?_method=delete" method="post">
+      <button>Eliminar</button>
+    </form>
+  </body>
+</html>

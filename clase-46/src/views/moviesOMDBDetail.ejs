@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("partials/head") %>
+  </head>
+
+  <body>
+    <%- include("partials/header") %>
+    <h1><%= movie.Title %></h1>
+    <p>RELEASE YEAR: <%= movie.Year %></p>
+    <img src="<%= movie.Poster %>" alt="movie poster" />
+
+    <button><a href="/movies">Volver</a></button>
+  </body>
+</html>

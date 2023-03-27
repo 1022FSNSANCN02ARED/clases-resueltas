@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("partials/head") %>
+  </head>
+
+  <body>
+    <%- include("partials/header") %>
+
+    <h1>LISTADO DE PELÍCULAS</h1>
+    <button><a href="/movies/add">Agregar Película</a></button>
+    <form action="/movies/search" method="get">
+      <input type="search" name="search" />
+      <button type="submit">Buscar película</button>
+    </form>
+    <ul>
+      <% for( let i = 0; i < movies.length; i++ ) { %>
+      <li>
+        <a href="/movies/detail/<%= movies[i].id %>"><%= movies[i].title %></a>
+      </li>
+      <% } %>
+    </ul>
+    <button><a href="/">Volver</a></button>
+  </body>
+</html>

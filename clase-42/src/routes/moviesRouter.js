@@ -6,6 +6,7 @@ router.get("/", moviesController.list);
 router.get("/new", moviesController.new);
 router.get("/recommended", moviesController.recommended);
 router.get("/detail/:id", moviesController.detail);
+router.get("/search", moviesController.search);
 
 router.get("/add", moviesController.add);
 router.post("/create", moviesController.create);

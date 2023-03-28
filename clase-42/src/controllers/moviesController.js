@@ -1,6 +1,10 @@
 const { Movies, Genres, Actors } = require("../database/models");
+const fetch = require("node-fetch");
 const Sequelize = require("sequelize");
 const dayjs = require("dayjs");
+
+const OMDB_API_KEY = "4083683d";
+const OMDB_API_URL = `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&`;
 
 module.exports = {
   list: (req, res) => {
@@ -105,5 +109,65 @@ module.exports = {
     }).then((movie) => {
       res.redirect("/movies");
     });
+  },
+  search: async (req, res) => {
+    //1. Buscar la película en nuestra base de datos
+    // 1b. Si está mostramos el detalle de la película
+    //2. Buscar la película en la API de OMDB
+    // 2b. Si está mostramos el detalle de la película con los datos de OMDB
+    //3. Mostramos mensaje de error 404
+
+    const searchString = req.query.search;
+    //searchString = "Doctor Strange Multiverse";
+    const termList = searchString.split(" ");
+    //["Doctor","Strange","Madness"]
+
+    const termListLikeOperations = termList.map((term) => {
+      return {
+        title: {
+          [Sequelize.Op.like]: "%" + term + "%",
+        },
+      };
+    });
+    //[{
+    //     title: {
+    //       [Sequelize.Op.like]: "%" + "Doctor" + "%",
+    //     },
+    //   },{
+    //     title: {
+    //       [Sequelize.Op.like]: "%" + "Strange" + "%",
+    //     },
+    //   },{
+    //     title: {
+    //       [Sequelize.Op.like]: "%" + "Madness" + "%",
+    //     },
+    //   }
+    // ]
+
+    let movie = await Movies.findOne({
+      where: {
+        [Sequelize.Op.and]: termListLikeOperations,
+      },
+      include: ["actors", "genre"],
+    });
+    if (movie) {
+      res.render("moviesDetail", {
+        movie,
+      });
+      return;
+    }
+
+    const response = await fetch(OMDB_API_URL + `s=${searchString}`);
+    const result = await response.json();
+
+    if (result.Search) {
+      movie = result.Search[0];
+      res.render("moviesOMDBDetail", {
+        movie,
+      });
+      return;
+    }
+
+    res.send(result.Error);
   },
 };

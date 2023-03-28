@@ -15,7 +15,9 @@
 
     <p>GENRE:</p>
     <% if (movie.genre_id) { %>
-    <p><a href="/genres/detail/<%= movie.genre_id %>"><%= movie.genre %></a></p>
+    <p>
+      <a href="/genres/detail/<%= movie.genre_id %>"><%= movie.genre.name %></a>
+    </p>
     <% } else { %>
     <p><%= movie.genre %></p>
     <% } %>

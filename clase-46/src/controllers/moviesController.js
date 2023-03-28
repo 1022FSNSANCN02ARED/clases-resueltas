@@ -2,6 +2,7 @@ const { Movies, Genres, Actors } = require("../database/models");
 const fetch = require("node-fetch");
 const Sequelize = require("sequelize");
 const dayjs = require("dayjs");
+const { validationResult } = require("express-validator");
 
 const OMDB_API_KEY = "4083683d";
 const OMDB_API_URL = `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&`;
@@ -64,8 +65,18 @@ module.exports = {
   add: async function (req, res) {
     res.render("moviesAdd", { genres: await Genres.findAll() });
   },
-  create: function (req, res) {
+  create: async function (req, res) {
     const movie = req.body;
+
+    const result = validationResult(req);
+    if (!result.isEmpty()) {
+      res.render("moviesAdd", {
+        genres: await Genres.findAll(),
+        errors: result.array(),
+        oldData: req.body,
+      });
+      return;
+    }
     Movies.create(movie).then((movie) => {
       res.redirect("/movies");
     });

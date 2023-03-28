@@ -2,40 +2,105 @@
 <html lang="es">
   <head>
     <%- include("partials/head") %>
+    <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
+    <script defer src="/js/moviesAdd.js"></script>
+    <style>
+      .errorBox {
+        background-color: red;
+      }
+      .display {
+        display: block !important;
+      }
+      .errorMsg {
+        display: none;
+        color:red;
+      }
+    </style>
   </head>
 
   <body>
     <%- include("partials/header") %>
     <h1 class="titulo">Agregar Película</h1>
-    <br />
+    
+    <% if (locals.errors) { %>
+      <div class="errorBox">
+        <ul>
+          <% locals.errors?.forEach(error => { %>
+           <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      </div>
+    <% } %>
+
     <section class="formulario">
-      <form action="/movies/create" method="POST">
+      <form action="/movies/create" method="POST" id="form">
         <div>
           <label for="title">Title </label>
-          <input type="text" name="title" id="" required />
+          <input
+            class="formInput"
+            type="text"
+            name="title"
+            id="title"
+            value="<%= locals.oldData?.title %>"
+            required
+          />
+          <span class="errorMsg" id="titleError">El mensaje va acá</span>
         </div>
         <div>
           <label for="rating">Rating </label>
-          <input type="number" name="rating" id="" required />
+          <input
+            class="formInput"
+            type="number"
+            name="rating"
+            id="rating"
+            value="<%= locals.oldData?.rating %>"
+          />
+          <span class="errorMsg" id="ratingError">El mensaje va acá</span>
         </div>
         <div>
           <label for="awards">Awards </label>
-          <input type="number" name="awards" id="" required />
+          <input
+            class="formInput"
+            type="number"
+            name="awards"
+            id="awards"
+            value="<%= locals.oldData?.awards %>"
+          />
+          <span class="errorMsg" id="awardsError">El mensaje va acá</span>
         </div>
         <div>
           <label for="release_date">Release date </label>
-          <input type="date" name="release_date" id="" required />
+          <input
+            class="formInput"
+            type="date"
+            name="release_date"
+            id="release_date"
+            value="<%= locals.oldData?.release_date %>"
+          />
+          <span class="errorMsg" id="release_dateError">El mensaje va acá</span>
         </div>
         <div>
           <label for="length">Length </label>
-          <input type="number" name="length" id="" required />
+          <input
+            class="formInput"
+            type="number"
+            name="length"
+            id="length"
+            value="<%= locals.oldData?.length %>"
+          />
+          <span class="errorMsg" id="lengthError">El mensaje va acá</span>
         </div>
         <div>
-          <select name="genre_id" id="genre_id">
+          <label for="genre_id">Genero</label>
+          <select class="formInput" name="genre_id" id="genre_id">
             <% genres.forEach((genre)=>{ %>
-            <option value="<%= genre.id %>"><%= genre.name %></option>
+            <option value="<%= genre.id %>"
+              <%= locals.oldData?.genre_id == genre.id ? "selected":"" %> >
+              <%= genre.name %>
+            </option>
             <% }) %>
           </select>
+          <span class="errorMsg" id="genre_idError">El mensaje va acá</span>
         </div>
 
         <div>

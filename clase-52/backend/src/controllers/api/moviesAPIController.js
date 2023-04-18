@@ -166,7 +166,10 @@ const moviesAPIController = {
         }
         res.json(respuesta);
       })
-      .catch((error) => res.send(error));
+      .catch((error) => {
+        console.log(error);
+        res.send(error);
+      });
   },
 };
 

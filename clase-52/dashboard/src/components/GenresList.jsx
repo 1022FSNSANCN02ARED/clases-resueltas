@@ -1,24 +1,42 @@
-import React from "react";
+import React, { Component } from "react";
 import GenreItem from "./GenreItem.jsx";
 import BigCard from "./BigCard.jsx";
 
-const genres = [
-  { id: 1, name: "Acción" },
-  { id: 2, name: "Animación" },
-  { id: 3, name: "Aventura" },
-  { id: 4, name: "Ciencia Ficción" },
-];
+class GenresList extends Component {
+  constructor(props) {
+    super(props);
 
-function GenresList() {
-  return (
-    <BigCard title="Genres in Data Base">
-      <div className="row">
-        {genres.map((genre) => {
-          return <GenreItem key={genre.id} name={genre.name} />;
-        })}
-      </div>
-    </BigCard>
-  );
+    //Especifico de GenresList
+    this.state = {
+      genres: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:3001/api/genres/")
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        this.setState({
+          genres: result.data,
+        });
+      });
+  }
+
+  render() {
+    return (
+      <BigCard title="Genres in Data Base">
+        <div className="row">
+          {this.state.genres.length === 0
+            ? "Cargando..."
+            : this.state.genres.map((genre) => {
+                return <GenreItem key={genre.id} name={genre.name} />;
+              })}
+        </div>
+      </BigCard>
+    );
+  }
 }
 
 export default GenresList;

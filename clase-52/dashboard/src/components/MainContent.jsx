@@ -2,6 +2,7 @@ import React from "react";
 import Stats from "./Stats.jsx";
 import LastMovie from "./LastMovie.jsx";
 import GenresList from "./GenresList.jsx";
+import MoviesList from "./MoviesList.jsx";
 
 function MainContent() {
   return (
@@ -13,6 +14,7 @@ function MainContent() {
       <div className="row">
         <LastMovie />
         <GenresList />
+        <MoviesList />
       </div>
     </div>
   );

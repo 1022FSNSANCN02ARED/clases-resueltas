@@ -1,12 +1,12 @@
 import React from "react";
 import BigCard from "./BigCard.jsx";
 import imgMandalorian from "../images/mandalorian.jpg";
-import MovieDetail from "./MovieDetail.jsx";
+import MovieAbstract from "./MovieAbstract.jsx";
 
 function LastMovie() {
   return (
     <BigCard title="Last movie in Data Base">
-      <MovieDetail
+      <MovieAbstract
         img={imgMandalorian}
         title="Star Wars - Mandalorian"
         desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores,

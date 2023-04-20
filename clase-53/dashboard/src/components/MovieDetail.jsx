@@ -1,24 +1,50 @@
-import React from "react";
+import React, { Component } from "react";
 
-function MovieDetail({ title, desc, img, url }) {
-  return (
-    <>
-      <div className="text-center">
-        <img
-          className="img-fluid px-3 px-sm-4 mt-3 mb-4"
-          style={{
-            width: "40rem",
-          }}
-          src={img}
-          alt={title}
-        />
-      </div>
-      <p>{desc}</p>
-      <a className="btn btn-danger" target="_blank" rel="noreferrer" href={url}>
-        View movie detail
-      </a>
-    </>
-  );
+class MovieDetail extends Component {
+  constructor(props) {
+    super(props);
+
+    const id = props.match.params.id;
+    console.log("Match:", props.match);
+
+    this.state = {
+      id,
+      movie: null,
+    };
+  }
+
+  componentDidMount() {
+    const id = this.state.id;
+
+    fetch(`http://localhost:3001/api/movies/${id}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        const movie = result.data;
+        this.setState({
+          id,
+          movie,
+        });
+      });
+  }
+
+  render() {
+    const movie = this.state.movie;
+    if (movie) {
+      //tengo movie
+      return (
+        <>
+          <h1>{movie.title}</h1>
+          <p>Genre: {movie.genre.name}</p>
+          <p>Length: {movie.length}</p>
+        </>
+      );
+    } else {
+      //No tengo movie todavía
+      return <p>Cargando...</p>;
+    }
+  }
 }
 
 export default MovieDetail;

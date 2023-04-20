@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class MoviesList extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class MoviesList extends Component {
         this.setState({
           movies: result.data,
         });
+        console.log("[MOVIES LIST] Cambió el estado");
       });
   }
 
@@ -53,6 +55,11 @@ class MoviesList extends Component {
                 <th>{movie.awards}</th>
                 <th>{movie.length}</th>
                 <th>
+                  <Link to={`/movies/${movie.id}`}>
+                    <button className="btn text-success">
+                      <i className="fas fa-eye"></i>
+                    </button>
+                  </Link>
                   <button
                     className="btn text-danger"
                     onClick={() => this.deleteMovie(movie)}

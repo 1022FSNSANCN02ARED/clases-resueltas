@@ -27,7 +27,7 @@ const myStats = [
 
 function Stats() {
   return (
-    <div className="row">
+    <div className="row flex-wrap">
       {myStats.map((stat) => {
         return (
           <SmallCard

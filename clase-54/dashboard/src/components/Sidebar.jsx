@@ -48,6 +48,13 @@ function Sidebar() {
       </li>
       {/* <!-- Nav Item - Tables --> */}
       <li className="nav-item">
+        <Link className="nav-link" to="/movies/search">
+          <i className="fas fa-fw fa-search"></i>
+          <span>Movies Search</span>
+        </Link>
+      </li>
+      {/* <!-- Nav Item - Tables --> */}
+      <li className="nav-item">
         <Link className="nav-link" to="/actors">
           <i className="fas fa-fw fa-table"></i>
           <span>Actors</span>

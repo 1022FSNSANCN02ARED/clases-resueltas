@@ -7,6 +7,7 @@ import MoviesList from "./MoviesList.jsx";
 import { Route, Switch } from "react-router-dom";
 import Page404 from "../pages/page404.jsx";
 import MovieDetail from "./MovieDetail.jsx";
+import MoviesSearch from "./MoviesSearch.jsx";
 
 function MainContent() {
   return (
@@ -25,6 +26,7 @@ function MainContent() {
         <Route path="/movies" exact={true}>
           <MoviesList />
         </Route>
+        <Route path="/movies/search" component={MoviesSearch} />
         <Route path="/movies/:id" component={MovieDetail} />
         <Route path="*" component={Page404} />
       </Switch>
